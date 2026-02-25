@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brandon Hernandez | Full Stack Developer</title>
+    <link rel="icon" type="image/png" href="./assets/img/LOGo.png">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <canvas id="snow-canvas"></canvas>
+
+    <header class="hero">
+        <nav class="navbar">
+            <span class="logo">Brandon Hernandez <small>(Nuvi)</small></span>
+            <button id="lang-btn" class="lang" style="background:none; cursor:pointer;">EN</button>
+        </nav>
+
+        <div class="hero-content">
+            <div class="hero-avatar">
+                <img src="assets/img/LogoTia.png" alt="Nuvi Logo">
+            </div>
+
+            <h1 class="text-gradient" data-i18n="hero_role">Full Stack Developer</h1>
+            <p data-i18n="hero_subtitle">Estudiante de TSU en Desarrollo de Software Multiplataforma</p>
+            
+            <div class="hero-actions">
+                <a href="#projects" class="btn-primary" data-i18n="btn_projects">Ver proyectos</a>
+                <a href="#contact" class="btn-secondary" data-i18n="btn_contact">Contactar</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="about" class="section">
+        <div class="container">
+            <h2 data-i18n="about_title">Sobre mí</h2>
+            <p style="text-align: center; max-width: 700px; margin: 0 auto; color: var(--text-muted);" data-i18n="about_text">
+                Soy un estudiante con enfoque Full Stack. Trabajo con HTML, CSS, PHP y MySQL, y actualmente refuerzo mis conocimientos en JavaScript. Me interesa crear aplicaciones web funcionales y orientadas a resolver problemas reales.
+            </p>
+        </div>
+    </section>
+
+    <section id="skills" class="section">
+        <div class="container">
+            <h2 data-i18n="skills_title">Habilidades & Tecnologías</h2>
+        
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3 data-i18n="skills_frontend">Frontend</h3>
+                    <div class="tags-container">
+                        <span class="tech-pill">HTML5</span>
+                        <span class="tech-pill">CSS3</span>
+                        <span class="tech-pill">JavaScript</span>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <h3 data-i18n="skills_backend">Backend</h3>
+                    <div class="tags-container">
+                        <span class="tech-pill">PHP</span>
+                        <span class="tech-pill">Node.js</span>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <h3 data-i18n="skills_db">Base de Datos</h3>
+                    <div class="tags-container">
+                        <span class="tech-pill">MySQL</span>
+                    </div>
+                </div>
+            
+                <div class="skill-card">
+                    <h3 data-i18n="skills_tools">Herramientas</h3>
+                    <div class="tags-container">
+                        <span class="tech-pill">Git</span>
+                        <span class="tech-pill">GitHub</span>
+                        <span class="tech-pill">VS Code</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="section">
+        <div class="container">
+            <h2 data-i18n="projects_title">Mis Proyectos</h2>
+
+            <div class="projects-grid">
+                
+                <a href="#" class="project-link">
+                    <div class="card project developing">
+                        <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Gestor de Justificantes" class="project-img">
+                        <div class="project-content">
+                            <div>
+                                <h3 data-i18n="proj1_title">Gestor de Justificantes</h3>
+                                <div class="tags-container">
+                                    <span class="tech-pill">HTML</span>
+                                    <span class="tech-pill">CSS</span>
+                                    <span class="tech-pill">JavaScript</span>
+                                    <span class="tech-pill">PHP</span>
+                                </div>
+                                <p data-i18n="proj1_desc">Plataforma intuitiva para que los estudiantes de diferentes carreras puedan solicitar y tramitar sus justificantes de inasistencia de forma rápida y sin complicaciones.</p>
+                            </div>
+                            <span class="project-status" data-i18n="status_dev">En desarrollo</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="project-link">
+                    <div class="card project planned">
+                        <img src="https://picsum.photos/id/20/600/400" alt="To Do List App" class="project-img">
+                        <div class="project-content">
+                            <div>
+                                <h3 data-i18n="proj2_title">To Do List App</h3>
+                                <div class="tags-container">
+                                    <span class="tech-pill">JavaScript</span>
+                                    <span class="tech-pill">LocalStorage</span>
+                                </div>
+                                <p data-i18n="proj2_desc">Aplicación rápida para organizar tareas diarias, diseñada para ser simple, directa y guardar tus datos al instante.</p>
+                            </div>
+                            <span class="project-status" data-i18n="status_plan">Planeado</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="project-link">
+                    <div class="card project planned">
+                        <img src="https://picsum.photos/id/119/600/400" alt="E-commerce" class="project-img">
+                        <div class="project-content">
+                            <div>
+                                <h3 data-i18n="proj3_title">Tienda E-commerce</h3>
+                                <div class="tags-container">
+                                    <span class="tech-pill">PHP</span>
+                                    <span class="tech-pill">MySQL</span>
+                                    <span class="tech-pill">UI/UX</span>
+                                </div>
+                                <p data-i18n="proj3_desc">Tienda en línea interactiva con catálogo de artículos, carrito de compras y diseño atractivo centrado en la experiencia del usuario.</p>
+                            </div>
+                            <span class="project-status" data-i18n="status_plan">Planeado</span>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section contact-section">
+        <div class="container">
+            <h2 class="text-gradient" data-i18n="contact_title">Trabajemos Juntos</h2>
+            
+            <div class="contact-wrapper">
+                
+                <div class="contact-form-card">
+                    <h3 data-i18n="contact_form_title">Envíame un mensaje</h3>
+                    <form action="#" method="POST">
+                        <div class="form-group">
+                            <label for="name" data-i18n="label_name">Nombre</label>
+                            <input type="text" id="name" data-i18n="ph_name" placeholder="Tu nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" data-i18n="label_email">Email</label>
+                            <input type="email" id="email" data-i18n="ph_email" placeholder="tu@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message" data-i18n="label_message">Mensaje</label>
+                            <textarea id="message" rows="4" data-i18n="ph_message" placeholder="Escribe tu mensaje aquí..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary" data-i18n="btn_send" style="width: 100%; border: none; cursor: pointer;">Enviar Mensaje</button>
+                    </form>
+                </div>
+
+                <div class="contact-info">
+                    <div class="info-text">
+                        <p data-i18n="contact_p1">Siempre estoy abierto a discutir nuevas oportunidades, proyectos creativos o colaboraciones.</p>
+                        <p data-i18n="contact_p2">Ya sea que tengas una idea específica en mente o simplemente quieras explorar posibilidades, ¡me encantaría conectar!</p>
+                        
+                        <ul class="services-list">
+                            <li data-i18n="service_1">• Desarrollo Web & Móvil</li>
+                            <li data-i18n="service_2">• Diseño UI/UX</li>
+                            <li data-i18n="service_3">• Consultoría Técnica</li>
+                        </ul>
+                    </div>
+
+                    <div class="social-links-area">
+                        <h4 data-i18n="social_title">Mis Redes</h4>
+                        <div class="social-icons">
+                            <a href="https://github.com/NuviX16" target="_blank" class="social-btn"><i class="fab fa-github"></i></a>
+                            <a href="#" target="_blank" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="mailto:brandhern16@gmail.com" class="social-btn"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="copyright-bar">
+        <p data-i18n="footer_copy">© 2026 Brandon Hernandez. Todos los derechos reservados.</p>
+    </footer>
+    
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
