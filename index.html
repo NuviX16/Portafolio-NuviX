@@ -3,207 +3,299 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brandon Hernandez | Full Stack Developer</title>
+    <title>Brandon Hernández · Nuvi | Desarrollador Full Stack</title>
+    <meta name="description" content="Portafolio de Brandon Hernández (Nuvi): TSU en Desarrollo de Software Multiplataforma, estudiante de Ingeniería ITIID. Mención honorífica NASA Space Apps 2026.">
+    <meta property="og:title" content="Brandon Hernández · Nuvi">
+    <meta property="og:description" content="Desarrollador Full Stack · per aspera ad astra">
+    <meta property="og:image" content="https://nuvix16.github.io/Portafolio-NuviX/assets/img/LogoTia.png">
+    <meta name="theme-color" content="#0c070e">
     <link rel="icon" type="image/png" href="./assets/img/LOGo.png">
-    
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
-    <canvas id="snow-canvas"></canvas>
+    <canvas id="stars" aria-hidden="true"></canvas>
+    <div class="nebula" aria-hidden="true"></div>
 
-    <header class="hero">
-        <nav class="navbar">
-            <span class="logo">Brandon Hernandez <small>(Nuvi)</small></span>
-            <button id="lang-btn" class="lang" style="background:none; cursor:pointer;">EN</button>
-        </nav>
-
-        <div class="hero-content">
-            <div class="hero-avatar">
-                <img src="assets/img/LogoTia.png" alt="Nuvi Logo">
+    <nav class="navbar">
+        <a href="#inicio" class="logo">nuvi<span>☾</span></a>
+        <div class="nav-links">
+            <a href="#sobre-mi" data-i18n="nav_about">Sobre mí</a>
+            <a href="#proyectos" data-i18n="nav_projects">Proyectos</a>
+            <a href="#logros" data-i18n="nav_awards">Logros</a>
+            <a href="#stack" data-i18n="nav_stack">Stack</a>
+            <a href="#contacto" data-i18n="nav_contact">Contacto</a>
+        </div>
+        <div class="nav-tools">
+            <div class="theme-picker">
+                <button id="theme-btn" class="pill-btn" aria-haspopup="true" aria-expanded="false" aria-controls="theme-menu">
+                    <i class="fa-solid fa-palette"></i> <span id="theme-name">tema</span>
+                </button>
+                <div id="theme-menu" class="theme-menu" role="menu" hidden>
+                    <p class="theme-menu-title" data-i18n="theme_title">Temas de mi escritorio</p>
+                    <div id="theme-list"></div>
+                </div>
             </div>
+            <button id="lang-btn" class="pill-btn" aria-label="Change language">EN</button>
+        </div>
+    </nav>
 
-            <h1 class="text-gradient" data-i18n="hero_role">Full Stack Developer</h1>
-            <p data-i18n="hero_subtitle">Estudiante de TSU en Desarrollo de Software Multiplataforma</p>
-            
+    <header id="inicio" class="hero">
+        <div class="hero-text reveal">
+            <p class="eyebrow"><span class="dot"></span> <span data-i18n="hero_hi">Hola, soy Brandon · Nuvi</span></p>
+            <h1><span data-i18n="hero_role_a">Desarrollador</span><br><span class="grad" data-i18n="hero_role_b">Full Stack</span></h1>
+            <p class="lead" data-i18n="hero_subtitle">Construyo sistemas que la gente usa de verdad: desde hablar con el cliente hasta la base de datos, el servidor y la interfaz.</p>
+            <a href="#logros" class="award-badge">
+                <i class="fa-solid fa-trophy"></i>
+                <span data-i18n="hero_award">Mención honorífica · NASA Space Apps Challenge 2026</span>
+            </a>
             <div class="hero-actions">
-                <a href="#projects" class="btn-primary" data-i18n="btn_projects">Ver proyectos</a>
-                <a href="#contact" class="btn-secondary" data-i18n="btn_contact">Contactar</a>
+                <a href="#proyectos" class="btn btn-primary"><span data-i18n="btn_projects">Ver proyectos</span> <i class="fa-solid fa-arrow-down"></i></a>
+                <a href="#contacto" class="btn btn-ghost" data-i18n="btn_contact">Contactar</a>
             </div>
+            <p class="motto">per aspera ad astra</p>
+        </div>
+        <div class="hero-avatar reveal">
+            <div class="ring"></div>
+            <img src="assets/img/LogoTia.png" alt="Nuvi" width="320" height="320">
+            <span class="orbit o1"></span><span class="orbit o2"></span>
         </div>
     </header>
 
-    <section id="about" class="section">
-        <div class="container">
-            <h2 data-i18n="about_title">Sobre mí</h2>
-            <p style="text-align: center; max-width: 700px; margin: 0 auto; color: var(--text-muted);" data-i18n="about_text">
-                Soy un estudiante con enfoque Full Stack. Trabajo con HTML, CSS, PHP y MySQL, y actualmente refuerzo mis conocimientos en JavaScript. Me interesa crear aplicaciones web funcionales y orientadas a resolver problemas reales.
-            </p>
-        </div>
-    </section>
-
-    <section id="skills" class="section">
-        <div class="container">
-            <h2 data-i18n="skills_title">Habilidades & Tecnologías</h2>
-        
-            <div class="skills-grid">
-                <div class="skill-card">
-                    <h3 data-i18n="skills_frontend">Frontend</h3>
-                    <div class="tags-container">
-                        <span class="tech-pill">HTML5</span>
-                        <span class="tech-pill">CSS3</span>
-                        <span class="tech-pill">JavaScript</span>
-                    </div>
+    <main>
+        <!-- ============ SOBRE MÍ ============ -->
+        <section id="sobre-mi" class="section">
+            <div class="container about">
+                <div class="reveal">
+                    <p class="kicker">01 · <span data-i18n="nav_about">Sobre mí</span></p>
+                    <h2 data-i18n="about_title">Código con propósito</h2>
+                    <p data-i18n="about_text">Soy Técnico Superior Universitario en Desarrollo de Software Multiplataforma y ahora estudio la Ingeniería en Tecnologías de la Información e Innovación Digital en la UT de Nayarit. Me gusta llevar los proyectos hasta producción y ver que la gente realmente los use.</p>
+                    <p data-i18n="about_text2">Trabajo con JavaScript, Node.js, Python y PostgreSQL, y despliego en Linux y Google Cloud. Fuera de clase convertí mi Arch Linux en un escritorio que cambia de tema con el fondo y tengo un bot de Discord corriendo 24/7 en la nube.</p>
                 </div>
-
-                <div class="skill-card">
-                    <h3 data-i18n="skills_backend">Backend</h3>
-                    <div class="tags-container">
-                        <span class="tech-pill">PHP</span>
-                        <span class="tech-pill">Node.js</span>
-                    </div>
-                </div>
-
-                <div class="skill-card">
-                    <h3 data-i18n="skills_db">Base de Datos</h3>
-                    <div class="tags-container">
-                        <span class="tech-pill">MySQL</span>
-                    </div>
-                </div>
-            
-                <div class="skill-card">
-                    <h3 data-i18n="skills_tools">Herramientas</h3>
-                    <div class="tags-container">
-                        <span class="tech-pill">Git</span>
-                        <span class="tech-pill">GitHub</span>
-                        <span class="tech-pill">VS Code</span>
-                    </div>
+                <div class="facts reveal">
+                    <div class="fact"><i class="fa-solid fa-graduation-cap"></i><div><b data-i18n="fact1_t">TSU en Desarrollo de Software</b><span data-i18n="fact1_d">UT de Nayarit · titulado en 2026</span></div></div>
+                    <div class="fact"><i class="fa-solid fa-book-open"></i><div><b data-i18n="fact2_t">Ingeniería ITIID</b><span data-i18n="fact2_d">Tecnologías de la Información e Innovación Digital · en curso</span></div></div>
+                    <div class="fact"><i class="fa-solid fa-rocket"></i><div><b>NASA Space Apps 2026</b><span data-i18n="fact3_d">Mención honorífica «Local Impact» con el equipo Gravizen</span></div></div>
+                    <div class="fact"><i class="fa-brands fa-linux"></i><div><b>Arch Linux</b><span data-i18n="fact4_d">Mi día a día: Hyprland, terminal y automatización</span></div></div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="projects" class="section">
-        <div class="container">
-            <h2 data-i18n="projects_title">Mis Proyectos</h2>
+        <!-- ============ PROYECTOS ============ -->
+        <section id="proyectos" class="section">
+            <div class="container">
+                <p class="kicker reveal">02 · <span data-i18n="nav_projects">Proyectos</span></p>
+                <h2 class="reveal" data-i18n="projects_title">Lo que he construido</h2>
 
-            <div class="projects-grid">
-                
-                <a href="#" class="project-link">
-                    <div class="card project developing">
-                        <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Gestor de Justificantes" class="project-img">
-                        <div class="project-content">
-                            <div>
-                                <h3 data-i18n="proj1_title">Gestor de Justificantes</h3>
-                                <div class="tags-container">
-                                    <span class="tech-pill">HTML</span>
-                                    <span class="tech-pill">CSS</span>
-                                    <span class="tech-pill">JavaScript</span>
-                                    <span class="tech-pill">PHP</span>
-                                </div>
-                                <p data-i18n="proj1_desc">Plataforma intuitiva para que los estudiantes de diferentes carreras puedan solicitar y tramitar sus justificantes de inasistencia de forma rápida y sin complicaciones.</p>
-                            </div>
-                            <span class="project-status" data-i18n="status_dev">En desarrollo</span>
+                <!-- Proyecto principal: estadía -->
+                <article class="feature reveal">
+                    <div class="feature-head">
+                        <span class="status status-dev"><span class="pulse"></span> <span data-i18n="st_dev">En desarrollo · estadía profesional</span></span>
+                        <h3>Muelles Tepic · <span data-i18n="p1_title">Sistema de taller</span></h3>
+                        <p data-i18n="p1_desc">Sistema para un taller de suspensiones en Tepic: inventario, órdenes de trabajo, cobros a crédito, garantías y finanzas para el dueño. Funciona en celular y en la PC del mostrador, con y sin internet.</p>
+                    </div>
+                    <div class="case">
+                        <div class="case-col">
+                            <h4><i class="fa-solid fa-triangle-exclamation"></i> <span data-i18n="case_problem">El problema</span></h4>
+                            <p data-i18n="p1_problem">Las órdenes se anotan en notas, los precios de cinco proveedores cambian cada mes y el WiFi falla hasta 4 horas en temporada de lluvias.</p>
+                        </div>
+                        <div class="case-col">
+                            <h4><i class="fa-solid fa-code-branch"></i> <span data-i18n="case_decisions">Las decisiones</span></h4>
+                            <ul>
+                                <li data-i18n="p1_d1">App web instalable (PWA) que funciona sin internet y sincroniza después</li>
+                                <li data-i18n="p1_d2">Inventario por movimientos: nunca se edita una cantidad, todo deja historial</li>
+                                <li data-i18n="p1_d3">Precio = costo de fábrica + margen, recalculado al cambiar el proveedor</li>
+                                <li data-i18n="p1_d4">Nada se borra: se cancela con motivo, porque hay dinero de por medio</li>
+                            </ul>
+                        </div>
+                        <div class="case-col">
+                            <h4><i class="fa-solid fa-route"></i> <span data-i18n="case_process">El proceso</span></h4>
+                            <p data-i18n="p1_process">Levantamiento con la administración del taller (32 preguntas), requerimientos, modelo de datos, arquitectura y plan en 5 fases con Scrum.</p>
                         </div>
                     </div>
-                </a>
-
-                <a href="#" class="project-link">
-                    <div class="card project planned">
-                        <img src="https://picsum.photos/id/20/600/400" alt="To Do List App" class="project-img">
-                        <div class="project-content">
-                            <div>
-                                <h3 data-i18n="proj2_title">To Do List App</h3>
-                                <div class="tags-container">
-                                    <span class="tech-pill">JavaScript</span>
-                                    <span class="tech-pill">LocalStorage</span>
-                                </div>
-                                <p data-i18n="proj2_desc">Aplicación rápida para organizar tareas diarias, diseñada para ser simple, directa y guardar tus datos al instante.</p>
-                            </div>
-                            <span class="project-status" data-i18n="status_plan">Planeado</span>
-                        </div>
+                    <div class="tags">
+                        <span class="tag">PWA</span><span class="tag">Offline-first</span><span class="tag">Node.js</span><span class="tag">PostgreSQL</span><span class="tag">IndexedDB</span><span class="tag">Scrum</span>
                     </div>
-                </a>
+                </article>
 
-                <a href="#" class="project-link">
-                    <div class="card project planned">
-                        <img src="https://picsum.photos/id/119/600/400" alt="E-commerce" class="project-img">
-                        <div class="project-content">
-                            <div>
-                                <h3 data-i18n="proj3_title">Tienda E-commerce</h3>
-                                <div class="tags-container">
-                                    <span class="tech-pill">PHP</span>
-                                    <span class="tech-pill">MySQL</span>
-                                    <span class="tech-pill">UI/UX</span>
-                                </div>
-                                <p data-i18n="proj3_desc">Tienda en línea interactiva con catálogo de artículos, carrito de compras y diseño atractivo centrado en la experiencia del usuario.</p>
-                            </div>
-                            <span class="project-status" data-i18n="status_plan">Planeado</span>
+                <div class="project-grid">
+                    <!-- Bot de Discord -->
+                    <article class="card reveal">
+                        <div class="card-top">
+                            <i class="fa-brands fa-discord card-icon"></i>
+                            <span class="status"><span class="pulse"></span> <span data-i18n="st_live247">En producción · 24/7</span></span>
                         </div>
-                    </div>
-                </a>
+                        <h3 data-i18n="p2_title">NuviX Bot</h3>
+                        <p data-i18n="p2_desc">Bot de Discord en Python que vive en una VM de Google Cloud y se comunica con un agente en mi laptop.</p>
+                        <ul class="highlights">
+                            <li data-i18n="p2_h1">Agenda con resumen diario, clima y avisos al celular</li>
+                            <li data-i18n="p2_h2">Seguimiento de anime, manga y ofertas con APIs públicas</li>
+                            <li data-i18n="p2_h3">Niveles, economía, tickets, encuestas y moderación automática</li>
+                            <li data-i18n="p2_h4">Panel web privado y monitoreo con Uptime Kuma</li>
+                        </ul>
+                        <div class="tags"><span class="tag">Python</span><span class="tag">discord.py</span><span class="tag">aiohttp</span><span class="tag">Google Cloud</span><span class="tag">Docker</span></div>
+                    </article>
 
-            </div>
-        </div>
-    </section>
+                    <!-- Escritorio -->
+                    <article class="card reveal">
+                        <div class="card-top">
+                            <i class="fa-brands fa-linux card-icon"></i>
+                            <span class="status status-soft" data-i18n="st_daily">Uso diario</span>
+                        </div>
+                        <h3 data-i18n="p3_title">Escritorio NuviX</h3>
+                        <p data-i18n="p3_desc">Arch Linux con Hyprland: el fondo animado decide los colores de todo el sistema, de la terminal y el navegador a Discord, Spotify y la pantalla de inicio.</p>
+                        <div class="swatches" id="swatches" aria-label="Temas"></div>
+                        <p class="hint" data-i18n="p3_hint">Toca un color: esta página usa las mismas paletas.</p>
+                        <div class="tags"><span class="tag">Bash</span><span class="tag">Python</span><span class="tag">Lua</span><span class="tag">QML</span><span class="tag">systemd</span></div>
+                    </article>
 
-    <section id="contact" class="section contact-section">
-        <div class="container">
-            <h2 class="text-gradient" data-i18n="contact_title">Trabajemos Juntos</h2>
-            
-            <div class="contact-wrapper">
-                
-                <div class="contact-form-card">
-                    <h3 data-i18n="contact_form_title">Envíame un mensaje</h3>
-                    <form action="mailto:brandhern16@gmail.com" method="POST" enctype="text/plain">
-                        <div class="form-group">
-                            <label for="name" data-i18n="label_name">Nombre</label>
-                            <input type="text" id="name" name="Nombre" data-i18n="ph_name" placeholder="Tu nombre" required>
+                    <!-- Inventario v1 -->
+                    <article class="card reveal">
+                        <div class="card-top">
+                            <i class="fa-solid fa-boxes-stacked card-icon"></i>
+                            <span class="status"><span class="pulse"></span> <span data-i18n="st_live">En producción</span></span>
                         </div>
-                        <div class="form-group">
-                            <label for="email" data-i18n="label_email">Email</label>
-                            <input type="email" id="email" name="Correo" data-i18n="ph_email" placeholder="tu@email.com" required>
+                        <h3 data-i18n="p4_title">Muelles Tepic · Inventario</h3>
+                        <p data-i18n="p4_desc">Primera versión del sistema de inventario del taller: productos, existencias y movimientos, usado a diario por el negocio.</p>
+                        <div class="tags"><span class="tag">JavaScript</span><span class="tag">PHP</span><span class="tag">MySQL</span></div>
+                    </article>
+
+                    <!-- PickUp&Seat -->
+                    <article class="card reveal">
+                        <div class="card-top">
+                            <i class="fa-solid fa-mug-hot card-icon"></i>
+                            <span class="status status-soft" data-i18n="st_school">Proyecto universitario</span>
                         </div>
-                        <div class="form-group">
-                            <label for="message" data-i18n="label_message">Mensaje</label>
-                            <textarea id="message" name="Mensaje" rows="4" data-i18n="ph_message" placeholder="Escribe tu mensaje aquí..." required></textarea>
+                        <h3>PickUp&amp;Seat</h3>
+                        <p data-i18n="p5_desc">Preventa, recogida y asiento para las cafeterías del campus: pides antes, eliges a qué hora recoger y apartas lugar. Cliente, cocina y administración se actualizan en tiempo real.</p>
+                        <div class="tags"><span class="tag">Node.js</span><span class="tag">PostgreSQL</span><span class="tag">WebSockets</span><span class="tag">Scrum</span></div>
+                    </article>
+
+                    <!-- Minería de datos -->
+                    <article class="card reveal">
+                        <div class="card-top">
+                            <i class="fa-solid fa-microchip card-icon"></i>
+                            <span class="status status-soft" data-i18n="st_school">Proyecto universitario</span>
                         </div>
-                            <button type="submit" class="btn-primary" data-i18n="btn_send" style="width: 100%; border: none; cursor: pointer;">Enviar Mensaje</button>
-                    </form>
+                        <h3 data-i18n="p6_title">Monitoreo de laboratorios</h3>
+                        <p data-i18n="p6_desc">Nodo Arduino con sensores de temperatura, humedad y luz. Con 1,440 lecturas entrené modelos SVM y KNN que detectan condiciones fuera de rango con hasta 100 % de exactitud.</p>
+                        <div class="tags"><span class="tag">Arduino</span><span class="tag">Python</span><span class="tag">scikit-learn</span><span class="tag">pandas</span></div>
+                    </article>
                 </div>
+            </div>
+        </section>
 
-                <div class="contact-info">
-                    <div class="info-text">
-                        <p data-i18n="contact_p1">Siempre estoy abierto a discutir nuevas oportunidades, proyectos creativos o colaboraciones.</p>
-                        <p data-i18n="contact_p2">Ya sea que tengas una idea específica en mente o simplemente quieras explorar posibilidades, ¡me encantaría conectar!</p>
-                        
-                        <ul class="services-list">
-                            <li data-i18n="service_1">• Desarrollo Web & Móvil</li>
-                            <li data-i18n="service_2">• Diseño UI/UX</li>
-                            <li data-i18n="service_3">• Consultoría Técnica</li>
+        <!-- ============ LOGROS ============ -->
+        <section id="logros" class="section">
+            <div class="container">
+                <p class="kicker reveal">03 · <span data-i18n="nav_awards">Logros</span></p>
+                <h2 class="reveal" data-i18n="awards_title">Reconocimientos y certificaciones</h2>
+                <div class="cert-grid">
+                    <a class="cert reveal cert-gold" href="assets/certs/nasa-mencion-local-impact.jpg" target="_blank" rel="noopener">
+                        <img src="assets/certs/nasa-mencion-local-impact.jpg" alt="Mención honorífica NASA Space Apps 2026" loading="lazy" width="1400" height="752">
+                        <div>
+                            <span class="cert-kind"><i class="fa-solid fa-trophy"></i> <span data-i18n="cert1_kind">Mención honorífica · 2026</span></span>
+                            <h3>NASA Space Apps Challenge</h3>
+                            <p data-i18n="cert1_desc">Categoría «Local Impact» con el equipo Gravizen.</p>
+                        </div>
+                    </a>
+                    <a class="cert reveal" href="assets/certs/nasa-galactic-problem-solver.jpg" target="_blank" rel="noopener">
+                        <img src="assets/certs/nasa-galactic-problem-solver.jpg" alt="Galactic Problem Solver, NASA Space Apps 2026" loading="lazy" width="1056" height="816">
+                        <div>
+                            <span class="cert-kind"><i class="fa-solid fa-rocket"></i> <span data-i18n="cert2_kind">Participación · 14–15 nov 2026</span></span>
+                            <h3>Galactic Problem Solver</h3>
+                            <p data-i18n="cert2_desc">Reconocimiento de NASA por resolver retos de la Tierra y el espacio.</p>
+                        </div>
+                    </a>
+                    <a class="cert reveal" href="assets/certs/cisco-direccionamiento-de-red.pdf" target="_blank" rel="noopener">
+                        <img src="assets/certs/cisco-direccionamiento-de-red.jpg" alt="Certificado Cisco Networking Academy" loading="lazy" width="1215" height="810">
+                        <div>
+                            <span class="cert-kind"><i class="fa-solid fa-network-wired"></i> Cisco Networking Academy · 2025</span>
+                            <h3 data-i18n="cert3_title">Direccionamiento de red y solución de problemas básicos</h3>
+                        </div>
+                    </a>
+                </div>
+                <p class="cert-extra reveal"><i class="fa-solid fa-certificate"></i> <span data-i18n="cert4">ECO0305 · Prestación de servicios de atención al cliente · Instituto de Capacitación para el Trabajo (2024)</span></p>
+            </div>
+        </section>
+
+        <!-- ============ STACK ============ -->
+        <section id="stack" class="section">
+            <div class="container">
+                <p class="kicker reveal">04 · Stack</p>
+                <h2 class="reveal" data-i18n="skills_title">Con qué trabajo</h2>
+                <div class="stack-grid">
+                    <div class="stack-card reveal">
+                        <h3 data-i18n="skills_frontend">Frontend</h3>
+                        <ul>
+                            <li><i class="fa-brands fa-html5"></i> HTML5 · CSS3</li>
+                            <li><i class="fa-brands fa-js"></i> JavaScript</li>
+                            <li><i class="fa-solid fa-mobile-screen"></i> PWA</li>
                         </ul>
                     </div>
-
-                    <div class="social-links-area">
-                        <h4 data-i18n="social_title">Mis Redes</h4>
-                        <div class="social-icons">
-                            <a href="https://github.com/NuviX16" target="_blank" class="social-btn"><i class="fab fa-github"></i></a>
-                            <a href="#" target="_blank" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="mailto:brandhern16@gmail.com" class="social-btn"><i class="fas fa-envelope"></i></a>
-                        </div>
+                    <div class="stack-card reveal">
+                        <h3 data-i18n="skills_backend">Backend</h3>
+                        <ul>
+                            <li><i class="fa-brands fa-node-js"></i> Node.js</li>
+                            <li><i class="fa-brands fa-python"></i> Python</li>
+                            <li><i class="fa-brands fa-php"></i> PHP</li>
+                        </ul>
+                    </div>
+                    <div class="stack-card reveal">
+                        <h3 data-i18n="skills_data">Datos</h3>
+                        <ul>
+                            <li><i class="fa-solid fa-database"></i> PostgreSQL</li>
+                            <li><i class="fa-solid fa-database"></i> MySQL</li>
+                            <li><i class="fa-solid fa-chart-line"></i> pandas · scikit-learn</li>
+                        </ul>
+                    </div>
+                    <div class="stack-card reveal">
+                        <h3 data-i18n="skills_infra">Infraestructura</h3>
+                        <ul>
+                            <li><i class="fa-brands fa-linux"></i> Linux · systemd</li>
+                            <li><i class="fa-brands fa-google"></i> Google Cloud</li>
+                            <li><i class="fa-brands fa-docker"></i> Docker</li>
+                        </ul>
+                    </div>
+                    <div class="stack-card reveal">
+                        <h3 data-i18n="skills_tools">Herramientas</h3>
+                        <ul>
+                            <li><i class="fa-brands fa-git-alt"></i> Git · GitHub</li>
+                            <li><i class="fa-solid fa-terminal"></i> Bash</li>
+                            <li><i class="fa-solid fa-microchip"></i> Arduino</li>
+                        </ul>
                     </div>
                 </div>
-
             </div>
-        </div>
-    </section>
+        </section>
 
-    <footer class="copyright-bar">
-        <p data-i18n="footer_copy">© 2026 Brandon Hernandez. Todos los derechos reservados.</p>
+        <!-- ============ CONTACTO ============ -->
+        <section id="contacto" class="section">
+            <div class="container">
+                <div class="contact reveal">
+                    <p class="kicker">05 · <span data-i18n="nav_contact">Contacto</span></p>
+                    <h2><span data-i18n="contact_title">Trabajemos</span> <span class="grad" data-i18n="contact_title2">juntos</span></h2>
+                    <p data-i18n="contact_p">¿Tienes un proyecto, una vacante o una idea? Escríbeme y platicamos.</p>
+                    <a class="btn btn-primary btn-lg" href="mailto:brandhern16@gmail.com"><i class="fa-solid fa-envelope"></i> brandhern16@gmail.com</a>
+                    <div class="socials">
+                        <a href="https://github.com/NuviX16" target="_blank" rel="noopener" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                        <a href="https://www.tiktok.com/@nuvix2607" target="_blank" rel="noopener" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+                        <a href="https://www.instagram.com/nuvidev06" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>© 2026 Brandon Hernández · <span data-i18n="footer_copy">hecho a mano con</span> <span class="grad">☾</span></p>
     </footer>
-    
+
     <script src="assets/js/script.js"></script>
 </body>
 </html>
