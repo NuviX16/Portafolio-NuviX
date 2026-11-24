@@ -213,6 +213,13 @@ h2 { font-size: clamp(2rem, 4vw, 2.8rem); letter-spacing: -1px; line-height: 1.1
 .highlights li { position: relative; padding-left: 18px; color: var(--text); font-size: 0.9rem; margin-bottom: 6px; opacity: 0.9; }
 .highlights li::before { content: "✦"; position: absolute; left: 0; color: var(--accent-3); font-size: 0.75rem; top: 0.15em; }
 
+.card-media { position: relative; aspect-ratio: 16 / 9; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); background: #000; }
+.card-media video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.card-gold { border-color: rgba(245, 201, 107, 0.3); }
+.card-gold:hover { border-color: rgba(245, 201, 107, 0.55); }
+.card-gold .card-icon { color: #f5c96b; background: rgba(245, 201, 107, 0.14); }
+.status-gold { color: #f5c96b; background: rgba(245, 201, 107, 0.12); border-color: rgba(245, 201, 107, 0.32); }
+
 .swatches { display: grid; grid-template-columns: repeat(8, 1fr); gap: 6px; }
 .swatch {
     aspect-ratio: 1; border-radius: 10px; cursor: pointer; border: 2px solid transparent; padding: 0;
