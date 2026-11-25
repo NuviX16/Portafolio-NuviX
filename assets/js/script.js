@@ -110,6 +110,7 @@ const EN = {
     p3_title: "NuviX Desktop",
     p3_desc: "Arch Linux with Hyprland: the animated wallpaper decides the colors of the whole system, from the terminal and browser to Discord, Spotify and the login screen.",
     p3_hint: "Tap a color: this page uses the same palettes.",
+    link_page: "See page",
     st_award: "Honorable mention · NASA",
     p7_desc: "Health dashboard for the crew of a space mission, built at the NASA Space Apps Challenge 2026 with team Gravizen.",
     p7_h1: "Daily check-in for each crew member: mood, sleep and symptoms",
