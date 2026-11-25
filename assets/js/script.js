@@ -1,6 +1,5 @@
-// ==========================================
-// 1. Temas: las mismas paletas de mi escritorio (Serpantinum / Hyprland)
-// ==========================================
+// Portafolio editorial: temas del escritorio, idioma ES/EN y detalles de navegación.
+document.documentElement.classList.add("js");
 const THEMES = {
     "Reze Bomb Devil":  { bg: "#0c070e", bg2: "#1a1020", bg3: "#26182e", text: "#f0e4ee", muted: "#b8a4b8", accent: "#a96bd8", accent2: "#c48fe0", accent3: "#e3a6c4", ok: "#5fe08a", warm: "#d99a8c" },
     "Rei Winter":       { bg: "#11131a", bg2: "#1b1f2a", bg3: "#262b39", text: "#e8ecf4", muted: "#a9b0c2", accent: "#a8c4ec", accent2: "#b9b8e0", accent3: "#e89aa6", ok: "#a9cfc4", warm: "#e8b4a8" },
@@ -35,66 +34,42 @@ const THEMES = {
 const DEFAULT_THEME = "Reze Bomb Devil";
 const store = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
-    set(k, v) { try { localStorage.setItem(k, v); } catch (e) { /* modo privado: no pasa nada */ } },
+    set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} },
 };
-const rgb = hex => [1, 3, 5].map(i => parseInt(hex.slice(i, i + 2), 16)).join(", ");
-let starColors = ["255,255,255"];
+const $ = id => document.getElementById(id);
 
 function applyTheme(name) {
-    const t = THEMES[name] || THEMES[DEFAULT_THEME];
     if (!THEMES[name]) name = DEFAULT_THEME;
-    const r = document.documentElement.style;
-    r.setProperty("--bg", t.bg); r.setProperty("--bg-2", t.bg2); r.setProperty("--bg-3", t.bg3);
-    r.setProperty("--text", t.text); r.setProperty("--muted", t.muted);
-    r.setProperty("--accent", t.accent); r.setProperty("--accent-2", t.accent2); r.setProperty("--accent-3", t.accent3);
-    r.setProperty("--ok", t.ok); r.setProperty("--warm", t.warm);
-    r.setProperty("--rgb-accent", rgb(t.accent)); r.setProperty("--rgb-accent-3", rgb(t.accent3));
-    r.setProperty("--card", `rgba(${rgb(t.bg2)}, 0.62)`);
+    const t = THEMES[name], r = document.documentElement.style;
+    const v = { "--bg": t.bg, "--bg-2": t.bg2, "--bg-3": t.bg3, "--text": t.text, "--muted": t.muted,
+                "--accent": t.accent, "--accent-2": t.accent2, "--accent-3": t.accent3 };
+    for (const k in v) r.setProperty(k, v[k]);
     document.querySelector('meta[name="theme-color"]').content = t.bg;
-    starColors = ["255,255,255", rgb(t.accent), rgb(t.accent2), rgb(t.accent3)];
-    stars.forEach(s => s.c = pickColor());
-    document.getElementById("theme-name").textContent = name;
-    document.querySelectorAll("[data-theme]").forEach(el => {
-        const on = el.dataset.theme === name;
-        el.setAttribute(el.classList.contains("swatch") ? "aria-pressed" : "aria-checked", on);
-    });
+    $("theme-name").textContent = name;
+    document.querySelectorAll(".theme-opt").forEach(el => el.setAttribute("aria-checked", el.dataset.theme === name));
+    document.querySelectorAll(".swatch").forEach(el => el.setAttribute("aria-pressed", el.dataset.theme === name));
     store.set("theme", name);
 }
-
-function buildThemeUI() {
-    const list = document.getElementById("theme-list");
-    const sw = document.getElementById("swatches");
-    for (const [name, t] of Object.entries(THEMES)) {
-        const opt = document.createElement("button");
-        opt.className = "theme-opt"; opt.setAttribute("role", "menuitemradio"); opt.dataset.theme = name;
-        opt.innerHTML = `<span class="dots">${[t.accent, t.accent2, t.accent3].map(c => `<i style="background:${c}"></i>`).join("")}</span>`;
-        opt.append(document.createTextNode(name));
-        opt.insertAdjacentHTML("beforeend", '<i class="fa-solid fa-check check"></i>');
-        opt.addEventListener("click", () => { applyTheme(name); closeMenu(); });
-        list.append(opt);
-
-        const b = document.createElement("button");
-        b.className = "swatch"; b.dataset.theme = name; b.title = name; b.setAttribute("aria-label", name);
-        b.style.background = `linear-gradient(135deg, ${t.accent} 0 50%, ${t.accent3} 50% 100%)`;
-        b.addEventListener("click", () => applyTheme(name));
-        sw.append(b);
-    }
+for (const [name, t] of Object.entries(THEMES)) {
+    const o = document.createElement("button");
+    o.className = "theme-opt"; o.type = "button"; o.setAttribute("role", "menuitemradio"); o.dataset.theme = name;
+    o.innerHTML = `<span class="dots">${[t.accent, t.accent2, t.accent3].map(c => `<i style="background:${c}"></i>`).join("")}</span>`;
+    o.append(document.createTextNode(name));
+    o.onclick = () => { applyTheme(name); cerrar(); };
+    $("theme-list").append(o);
+    const b = document.createElement("button");
+    b.className = "swatch"; b.type = "button"; b.dataset.theme = name; b.title = name; b.setAttribute("aria-label", name);
+    b.style.background = `linear-gradient(135deg, ${t.accent} 0 50%, ${t.accent3} 50% 100%)`;
+    b.onclick = () => applyTheme(name);
+    $("swatches").append(b);
 }
+const menu = $("theme-menu"), boton = $("theme-btn");
+function cerrar() { menu.hidden = true; boton.setAttribute("aria-expanded", "false"); }
+boton.onclick = e => { e.stopPropagation(); menu.hidden = !menu.hidden; boton.setAttribute("aria-expanded", String(!menu.hidden)); };
+document.addEventListener("click", e => { if (!menu.hidden && !menu.contains(e.target)) cerrar(); });
+document.addEventListener("keydown", e => { if (e.key === "Escape") cerrar(); });
 
-const themeBtn = document.getElementById("theme-btn");
-const themeMenu = document.getElementById("theme-menu");
-function closeMenu() { themeMenu.hidden = true; themeBtn.setAttribute("aria-expanded", "false"); }
-themeBtn.addEventListener("click", e => {
-    e.stopPropagation();
-    themeMenu.hidden = !themeMenu.hidden;
-    themeBtn.setAttribute("aria-expanded", String(!themeMenu.hidden));
-});
-document.addEventListener("click", e => { if (!themeMenu.hidden && !themeMenu.contains(e.target)) closeMenu(); });
-document.addEventListener("keydown", e => { if (e.key === "Escape") closeMenu(); });
-
-// ==========================================
-// 2. Idioma (ES / EN): el español se toma del HTML, aquí solo va el inglés
-// ==========================================
+// idioma: el español se toma del HTML; aquí solo va el inglés
 const EN = {
     nav_about: "About", nav_projects: "Projects", nav_awards: "Awards", nav_stack: "Stack", nav_contact: "Contact",
     theme_title: "My desktop themes",
@@ -154,91 +129,30 @@ const EN = {
     contact_title: "Let's work", contact_title2: "together",
     contact_p: "Got a project, a job opening or an idea? Write me and let's talk.",
     footer_copy: "handmade with",
+    hero_place: "Tepic, Mexico · open to projects and jobs", hero_role: "Full stack developer",
+    d_studies: "Studies", d_now: "Now", d_award: "Award", d_daily: "Daily",
 };
 const ES = {};
 document.querySelectorAll("[data-i18n]").forEach(el => { ES[el.dataset.i18n] ??= el.textContent; });
-
-const langBtn = document.getElementById("lang-btn");
+const langBtn = $("lang-btn");
 function setLang(lang) {
     const dict = lang === "en" ? EN : ES;
     document.documentElement.lang = lang;
     langBtn.textContent = lang === "es" ? "EN" : "ES";
     langBtn.setAttribute("aria-label", lang === "es" ? "Change language to English" : "Cambiar idioma a español");
-    document.querySelectorAll("[data-i18n]").forEach(el => {
-        const t = dict[el.dataset.i18n];
-        if (t) el.textContent = t;
-    });
+    document.querySelectorAll("[data-i18n]").forEach(el => { const t = dict[el.dataset.i18n]; if (t) el.textContent = t; });
     store.set("lang", lang);
 }
-langBtn.addEventListener("click", () => setLang(document.documentElement.lang === "es" ? "en" : "es"));
+langBtn.onclick = () => setLang(document.documentElement.lang === "es" ? "en" : "es");
 
-// ==========================================
-// 3. Aparición al hacer scroll
-// ==========================================
-const io = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("visible"); io.unobserve(e.target); } });
-}, { threshold: 0.12 });
-document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+// barra de navegación con fondo al bajar
+const nav = document.querySelector(".nav");
+const fondoNav = () => nav.classList.toggle("solida", scrollY > 60);
+addEventListener("scroll", fondoNav, { passive: true }); fondoNav();
 
-// ==========================================
-// 4. Cielo de estrellas (titilan, siguen al mouse y a veces cae una fugaz), con los colores del tema
-// ==========================================
-const canvas = document.getElementById("stars");
-const ctx = canvas.getContext("2d");
-const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-let W, H, DPR, stars = [], shooting = null, mx = 0, my = 0;
-const pickColor = () => starColors[Math.random() < 0.78 ? 0 : 1 + Math.floor(Math.random() * (starColors.length - 1))];
+// aparición suave
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("visible"); io.unobserve(e.target); } }), { threshold: .12 });
+document.querySelectorAll(".bloque h2, .principal, .proyecto, .fila, .cert, .specs dl, .dos").forEach(el => { el.classList.add("aparece"); io.observe(el); });
 
-function resize() {
-    DPR = Math.min(window.devicePixelRatio || 1, 2);
-    W = window.innerWidth; H = window.innerHeight;
-    canvas.width = W * DPR; canvas.height = H * DPR;
-    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-    stars = Array.from({ length: Math.round(W * H / 5200) }, () => ({
-        x: Math.random() * W, y: Math.random() * H,
-        r: Math.random() * 1.3 + 0.2, z: Math.random() * 0.8 + 0.2, c: pickColor(),
-        p: Math.random() * Math.PI * 2, s: Math.random() * 0.02 + 0.005,
-    }));
-}
-
-function frame() {
-    ctx.clearRect(0, 0, W, H);
-    for (const st of stars) {
-        st.p += st.s;
-        const a = 0.35 + Math.sin(st.p) * 0.35 + 0.3 * st.z;
-        const x = st.x + mx * st.z * 14, y = st.y + my * st.z * 14 - (window.scrollY * st.z * 0.05) % H;
-        ctx.beginPath();
-        ctx.arc(x, (y + H) % H, st.r * st.z + 0.2, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${st.c},${Math.max(0.05, Math.min(1, a))})`;
-        ctx.fill();
-    }
-    if (!reduce && !shooting && Math.random() < 0.004) {
-        shooting = { x: Math.random() * W * 0.7 + W * 0.2, y: Math.random() * H * 0.4, l: 0, v: 9 + Math.random() * 6 };
-    }
-    if (shooting) {
-        const s = shooting; s.l += s.v;
-        const x = s.x - s.l, y = s.y + s.l * 0.45;
-        const g = ctx.createLinearGradient(x, y, x + 90, y - 40);
-        g.addColorStop(0, "rgba(255,255,255,0.9)"); g.addColorStop(1, `rgba(${starColors[3] || starColors[0]},0)`);
-        ctx.strokeStyle = g; ctx.lineWidth = 1.6;
-        ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + 90, y - 40); ctx.stroke();
-        if (s.l > W * 0.6) shooting = null;
-    }
-    if (!reduce) requestAnimationFrame(frame);
-}
-window.addEventListener("resize", () => { resize(); if (reduce) frame(); });
-window.addEventListener("mousemove", e => { mx = e.clientX / W - 0.5; my = e.clientY / H - 0.5; });
-
-// ==========================================
-// 5. Arranque
-// ==========================================
-resize();
-buildThemeUI();
 applyTheme(store.get("theme") || DEFAULT_THEME);
-const savedLang = store.get("lang");
-if ((savedLang || ((navigator.language || "es").startsWith("es") ? "es" : "en")) === "en") setLang("en");
-frame();
-if (reduce) {
-    // sin animación, el cielo se pinta una vez y se repinta al cambiar de tema
-    document.querySelectorAll("[data-theme]").forEach(b => b.addEventListener("click", () => frame()));
-}
+if (store.get("lang") === "en") setLang("en");
