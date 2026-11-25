@@ -313,3 +313,5 @@ h2 { font-size: clamp(2rem, 4vw, 2.8rem); letter-spacing: -1px; line-height: 1.1
 .card-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
 .card-links a { display: inline-flex; align-items: center; gap: 7px; font-size: 0.86rem; font-weight: 600; padding: 7px 13px; border-radius: 10px; text-decoration: none; color: var(--accent-2); background: rgba(var(--rgb-accent), 0.12); border: 1px solid var(--line); transition: background .2s; }
 .card-links a:hover { background: rgba(var(--rgb-accent), 0.24); }
+/* 29 temas: el menú se desplaza en lugar de salirse de la pantalla */
+.theme-menu { max-height: min(70vh, 560px); overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; }
